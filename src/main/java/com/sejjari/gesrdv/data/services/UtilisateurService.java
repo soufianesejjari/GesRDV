@@ -11,11 +11,14 @@ import java.util.Optional;
 @Service
 public class UtilisateurService {
 
-    @Autowired
-    private UtilisateurRepository utilisateurRepository;
+    private final UtilisateurRepository utilisateurRepository;
+
+    public UtilisateurService(UtilisateurRepository utilisateurRepository) {
+        this.utilisateurRepository = utilisateurRepository;
+    }
 
     public Utilisateur createUtilisateur(String prenom, String nom, String email, String motDePasse, String telephone, String role) {
-        return Utilisateur.builder()
+        Utilisateur user= Utilisateur.builder()
                 .prenom(prenom)
                 .nom(nom)
                 .email(email)
@@ -23,6 +26,7 @@ public class UtilisateurService {
                 .telephone(telephone)
                 .role(role)
                 .build();
+        return save(user);
     }
 
     public Utilisateur save(Utilisateur utilisateur) {

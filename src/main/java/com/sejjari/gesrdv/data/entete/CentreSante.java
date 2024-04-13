@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -33,7 +34,7 @@ public class CentreSante {
             joinColumns = @JoinColumn(name = "centre_sante_id"),
             inverseJoinColumns = @JoinColumn(name = "creneau_id")
     )
-    private Set<Creneau> creneaux;
+    private List<Creneau> creneaux;
 
     // Getters et setters
 }

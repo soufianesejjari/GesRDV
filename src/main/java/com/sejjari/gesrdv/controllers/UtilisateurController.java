@@ -7,13 +7,18 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/utilisateurs")
 
 public class UtilisateurController {
 
-    @Autowired
-    private UtilisateurService utilisateurService;
+    private final UtilisateurService utilisateurService;
+
+    public UtilisateurController(UtilisateurService utilisateurService) {
+        this.utilisateurService = utilisateurService;
+    }
 
     // Endpoint to create a new utilisateur
     @PostMapping
@@ -23,8 +28,19 @@ public class UtilisateurController {
                 ,utilisateur.getTelephone(),utilisateur.getRole()
 
                 );
+
         return new ResponseEntity<>(createdUtilisateur, HttpStatus.CREATED);
     }
+
+    // endpoint to retrieve all users
+    @GetMapping
+    public ResponseEntity<Iterable<Utilisateur>> getUtilisateurs() {
+        Iterable<Utilisateur> all_utilisateurs = utilisateurService.getAllUtilisateurs();
+
+        return new ResponseEntity<>(all_utilisateurs, HttpStatus.OK);
+    }
+
+
 
     // Endpoint to retrieve a specific utilisateur by id
     @GetMapping("/{id}")

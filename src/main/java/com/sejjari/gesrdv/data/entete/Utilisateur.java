@@ -3,8 +3,7 @@ package com.sejjari.gesrdv.data.entete;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Data
 @AllArgsConstructor
@@ -23,7 +22,13 @@ public class Utilisateur {
     private String email;
     private String motDePasse;
     private String telephone;
-    private String role;
+    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "utilisateur_role",
+            joinColumns = @JoinColumn(name = "utilisateur_id"),
+            inverseJoinColumns = @JoinColumn(name = "roles_id")
+    )
+    private List<Role> roles=new ArrayList<>();
 
 
 

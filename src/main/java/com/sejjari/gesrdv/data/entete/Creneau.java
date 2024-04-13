@@ -3,6 +3,7 @@ package com.sejjari.gesrdv.data.entete;
 
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -28,7 +29,9 @@ public class Creneau {
     private String heureFin;
     private int capacite;
 
-    @ManyToMany(mappedBy = "creneaux")
+    @JsonIgnore
+
+    @ManyToMany(mappedBy = "creneaux",fetch = FetchType.LAZY)
     private Set<CentreSante> centresSante;
 
     // Getters et setters
