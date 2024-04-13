@@ -1,10 +1,13 @@
 package com.sejjari.gesrdv.data.services;
 
+import com.sejjari.gesrdv.data.entete.Role;
 import com.sejjari.gesrdv.data.entete.Utilisateur;
+import com.sejjari.gesrdv.data.repository.RoleRepository;
 import com.sejjari.gesrdv.data.repository.UtilisateurRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,12 +15,18 @@ import java.util.Optional;
 public class UtilisateurService {
 
     private final UtilisateurRepository utilisateurRepository;
+    private final RoleRepository roleRepository;
 
-    public UtilisateurService(UtilisateurRepository utilisateurRepository) {
+    public UtilisateurService(UtilisateurRepository utilisateurRepository, RoleRepository roleRepository) {
         this.utilisateurRepository = utilisateurRepository;
+        this.roleRepository = roleRepository;
     }
 
     public Utilisateur createUtilisateur(Utilisateur utilisateur) {
+        Role role= roleRepository.findByName("USER");
+        List<Role> roles= new ArrayList<Role>();
+        roles.add(0,role);
+        utilisateur.setRoles(roles);
 
         return save(utilisateur);
     }
