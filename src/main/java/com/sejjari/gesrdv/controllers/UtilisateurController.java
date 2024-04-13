@@ -23,10 +23,7 @@ public class UtilisateurController {
     // Endpoint to create a new utilisateur
     @PostMapping
     public ResponseEntity<Utilisateur> createUtilisateur(@RequestBody Utilisateur utilisateur) {
-        Utilisateur createdUtilisateur = utilisateurService.createUtilisateur(utilisateur.getPrenom(),
-                utilisateur.getNom(),utilisateur.getEmail(),utilisateur.getMotDePasse()
-                ,utilisateur.getTelephone(),utilisateur.getRole()
-
+        Utilisateur createdUtilisateur = utilisateurService.createUtilisateur(utilisateur
                 );
 
         return new ResponseEntity<>(createdUtilisateur, HttpStatus.CREATED);

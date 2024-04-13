@@ -17,16 +17,9 @@ public class UtilisateurService {
         this.utilisateurRepository = utilisateurRepository;
     }
 
-    public Utilisateur createUtilisateur(String prenom, String nom, String email, String motDePasse, String telephone, String role) {
-        Utilisateur user= Utilisateur.builder()
-                .prenom(prenom)
-                .nom(nom)
-                .email(email)
-                .motDePasse(motDePasse)
-                .telephone(telephone)
-                .role(role)
-                .build();
-        return save(user);
+    public Utilisateur createUtilisateur(Utilisateur utilisateur) {
+
+        return save(utilisateur);
     }
 
     public Utilisateur save(Utilisateur utilisateur) {
