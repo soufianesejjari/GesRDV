@@ -1,10 +1,9 @@
 package com.sejjari.gesrdv.data.services;
 
-import com.sejjari.gesrdv.data.entete.Role;
-import com.sejjari.gesrdv.data.entete.Utilisateur;
+import com.sejjari.gesrdv.data.entity.Role;
+import com.sejjari.gesrdv.data.entity.Utilisateur;
 import com.sejjari.gesrdv.data.repository.RoleRepository;
 import com.sejjari.gesrdv.data.repository.UtilisateurRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

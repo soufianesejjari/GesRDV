@@ -1,4 +1,4 @@
-package com.sejjari.gesrdv.data.entete;
+package com.sejjari.gesrdv.data.entity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
-import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -28,7 +27,8 @@ public class CentreSante {
     private String email;
     private String siteWeb;
 
-    @ManyToMany
+    @ManyToMany(
+            cascade = CascadeType.ALL)
     @JoinTable(
             name = "centre_sante_creneau",
             joinColumns = @JoinColumn(name = "centre_sante_id"),

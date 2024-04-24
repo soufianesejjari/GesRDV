@@ -1,5 +1,6 @@
 package com.sejjari.gesrdv.controllers;
-import com.sejjari.gesrdv.data.entete.Creneau;
+import com.sejjari.gesrdv.data.dto.AddedCreneau;
+import com.sejjari.gesrdv.data.entity.Creneau;
 import com.sejjari.gesrdv.data.services.CreneauService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +20,15 @@ public class CreneauController {
         Creneau createdCreneau = creneauService.createCreneau(creneau);
         return new ResponseEntity<>(createdCreneau, HttpStatus.CREATED);
     }
-
+    @PostMapping("/default")
+    public ResponseEntity<String> addDefaultSlots(@RequestBody AddedCreneau addedCreneau) {
+        try {
+            creneauService.addDefaultCreneaux(addedCreneau);
+            return new ResponseEntity<>("Default slots added successfully.", HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Failed to add default slots: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
     @GetMapping("/{id}")
     public ResponseEntity<Creneau> getCreneauById(@PathVariable Long id) {
         Creneau creneau = creneauService.getCreneauById(id);

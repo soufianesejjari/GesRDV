@@ -1,9 +1,8 @@
 package com.sejjari.gesrdv.securite;
 
-import com.sejjari.gesrdv.data.entete.Role;
-import com.sejjari.gesrdv.data.entete.Utilisateur;
+import com.sejjari.gesrdv.data.entity.Role;
+import com.sejjari.gesrdv.data.entity.Utilisateur;
 import com.sejjari.gesrdv.data.repository.UtilisateurRepository;
-import com.sejjari.gesrdv.data.services.UtilisateurService;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;

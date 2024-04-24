@@ -1,8 +1,8 @@
 package com.sejjari.gesrdv.data.services;
 
 import com.sejjari.gesrdv.data.dto.CnetreSanteDto;
-import com.sejjari.gesrdv.data.entete.CentreSante;
-import com.sejjari.gesrdv.data.entete.Creneau;
+import com.sejjari.gesrdv.data.entity.CentreSante;
+import com.sejjari.gesrdv.data.entity.Creneau;
 import com.sejjari.gesrdv.data.repository.CentreSanteRepository;
 import com.sejjari.gesrdv.data.repository.CreneauRepository;
 
@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 public class CentreSanteService {

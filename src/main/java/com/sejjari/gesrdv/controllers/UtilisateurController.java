@@ -1,13 +1,11 @@
 package com.sejjari.gesrdv.controllers;
 
-import com.sejjari.gesrdv.data.entete.Utilisateur;
+import com.sejjari.gesrdv.data.entity.Utilisateur;
 import com.sejjari.gesrdv.data.services.UtilisateurService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/utilisateurs")
@@ -22,6 +20,7 @@ public class UtilisateurController {
 
     // Endpoint to create a new utilisateur
     @PostMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Utilisateur> createUtilisateur(@RequestBody Utilisateur utilisateur) {
         Utilisateur createdUtilisateur = utilisateurService.createUtilisateur(utilisateur
                 );

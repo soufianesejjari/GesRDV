@@ -1,16 +1,12 @@
 package com.sejjari.gesrdv.controllers;
 
 import com.sejjari.gesrdv.data.dto.CnetreSanteDto;
-import com.sejjari.gesrdv.data.entete.CentreSante;
-import com.sejjari.gesrdv.data.entete.Creneau;
+import com.sejjari.gesrdv.data.entity.CentreSante;
 import com.sejjari.gesrdv.data.services.CentreSanteService;
 import com.sejjari.gesrdv.data.services.CreneauService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Set;
 
 @RestController
 @RequestMapping("/centres")

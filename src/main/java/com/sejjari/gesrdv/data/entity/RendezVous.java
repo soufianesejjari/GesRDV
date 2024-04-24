@@ -1,4 +1,4 @@
-package com.sejjari.gesrdv.data.entete;
+package com.sejjari.gesrdv.data.entity;
 
 
 import jakarta.persistence.*;
@@ -26,10 +26,13 @@ public class RendezVous {
     @JoinColumn(name = "utilisateur_id")
     private Utilisateur utilisateur;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "centre_sante_id")
     private CentreSante centreSante;
-
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "Creneau_id")
+    private Creneau creneau;
+    @Temporal(TemporalType.DATE)
     private Date dateRendezVous;
     private String statut;
 

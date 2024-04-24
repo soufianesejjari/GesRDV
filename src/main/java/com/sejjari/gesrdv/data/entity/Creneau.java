@@ -1,4 +1,4 @@
-package com.sejjari.gesrdv.data.entete;
+package com.sejjari.gesrdv.data.entity;
 
 
 
@@ -10,6 +10,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Data
@@ -23,6 +25,8 @@ public class Creneau {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Temporal(TemporalType.DATE)
+    private Date date; // Ajout de l'attribut date
 
     private String jour;
     private String heureDebut;
@@ -31,8 +35,8 @@ public class Creneau {
 
     @JsonIgnore
 
-    @ManyToMany(mappedBy = "creneaux",fetch = FetchType.LAZY)
-    private Set<CentreSante> centresSante;
+    @ManyToMany(mappedBy = "creneaux",fetch = FetchType.LAZY,cascade = CascadeType.REMOVE)
+    private Set<CentreSante> centresSante =new HashSet<>();
 
     // Getters et setters
 }

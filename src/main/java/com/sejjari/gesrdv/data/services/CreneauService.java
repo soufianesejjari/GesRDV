@@ -1,15 +1,13 @@
 package com.sejjari.gesrdv.data.services;
 
-import com.sejjari.gesrdv.data.entete.CentreSante;
-import com.sejjari.gesrdv.data.entete.Creneau;
+import com.sejjari.gesrdv.data.dto.AddedCreneau;
+import com.sejjari.gesrdv.data.entity.CentreSante;
+import com.sejjari.gesrdv.data.entity.Creneau;
 import com.sejjari.gesrdv.data.repository.CentreSanteRepository;
 import com.sejjari.gesrdv.data.repository.CreneauRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.modelmapper.internal.bytebuddy.implementation.bytecode.Throw;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class CreneauService {
@@ -65,4 +63,67 @@ public class CreneauService {
         }
     }
 
+    public void addDefaultCreneaux(AddedCreneau addedCreneau) {
+        CentreSante centreSante = centreSanteRepository.findById(addedCreneau.getCenter_id())
+                .orElseThrow(() -> new IllegalArgumentException("Pas de centre trouvé pour ce créneau"));
+        // Parcourir chaque date dans la plage spécifiée
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(addedCreneau.getStartDate());
+        while (!calendar.getTime().after(addedCreneau.getEndDate())) {
+            // Ajouter les créneaux pour chaque jour
+            //
+             addDefaultCreneauxForDate((Date) calendar.getTime(), centreSante);
+
+            // Passer à la prochaine date
+            calendar.add(Calendar.DAY_OF_MONTH, 1);
+        }
+    }
+    private void addDefaultCreneauxForDate(Date date, CentreSante centreSante) {
+        // Ajouter les créneaux pour chaque heure
+        // Pour samedi, ajouter uniquement les créneaux du matin
+        // Pour dimanche, ne pas ajouter de créneaux
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+
+        if (dayOfWeek == Calendar.SATURDAY) {
+            // Ajouter uniquement les créneaux du matin (de 8h à 12h)
+            for (int hour = 8; hour < 12; hour++) {
+                Creneau creneau = creerCreneau(date, hour, centreSante);
+                // Enregistrer le créneau dans la base de données
+                creneauRepository.save(creneau);
+            }
+        } else if (dayOfWeek != Calendar.SUNDAY) {
+            // Pour les autres jours de la semaine, ajouter les créneaux de 8h à 18h
+            for (int hour = 8; hour < 18; hour++) {
+                Creneau creneau = creerCreneau(date, hour, centreSante);
+                // Enregistrer le créneau dans la base de données
+                // Sauvegarder le créneau
+                creneauRepository.save(creneau);
+                if (centreSante.getCreneaux() == null) {
+                    centreSante.setCreneaux((List<Creneau>) new HashSet<>(Collections.singletonList(creneau)));
+                } else {
+                    centreSante.getCreneaux().add(creneau);
+                }
+            }
+        }
+    }
+
+    private Creneau creerCreneau(Date date, int hour, CentreSante centreSante) {
+        // Créer un nouveau créneau avec les données fournies
+        Creneau creneau = new Creneau();
+        creneau.setDate(date);
+        creneau.setHeureDebut(hour + ":00");
+        creneau.setHeureFin((hour + 1) + ":00");
+        creneau.setCapacite(5);
+        // Associer le centre de santé au créneau
+        if (creneau.getCentresSante() == null) {
+            creneau.setCentresSante(new HashSet<>(Collections.singletonList(centreSante)));
+        } else {
+            creneau.getCentresSante().add(centreSante);
+        }
+
+
+        return creneau;
+    }
     }

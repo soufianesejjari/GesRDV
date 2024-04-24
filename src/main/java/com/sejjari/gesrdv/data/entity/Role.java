@@ -1,4 +1,4 @@
-package com.sejjari.gesrdv.data.entete;
+package com.sejjari.gesrdv.data.entity;
 
 
 import jakarta.persistence.*;

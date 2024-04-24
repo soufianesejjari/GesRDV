@@ -1,6 +1,3 @@
-
-
-
 spring:
   application:
     name: GesRDV
@@ -14,3 +11,14 @@ spring:
       hibernate:
         ddl-auto: update
       show-sql: true
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: "sejjari.soufian@gmail.com"
+    password: "ecnz tyym nhdk echo"
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true

@@ -38,6 +38,8 @@ import org.springframework.stereotype.Service;
                     .signWith(SignatureAlgorithm.HS256, SecurityConstants.JWT_SECRET)
                     .compact();
             System.out.println(token);
+
+
             return token;
         }
 

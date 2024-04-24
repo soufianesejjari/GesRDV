@@ -1,6 +1,6 @@
 package com.sejjari.gesrdv.data.services;
 
-import com.sejjari.gesrdv.data.entete.Role;
+import com.sejjari.gesrdv.data.entity.Role;
 import com.sejjari.gesrdv.data.repository.RoleRepository;
 import org.springframework.stereotype.Service;
 

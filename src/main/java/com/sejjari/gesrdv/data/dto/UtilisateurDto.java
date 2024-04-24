@@ -14,6 +14,6 @@ public class UtilisateurDto {
     private String prenom;
     private String nom;
     private String email;
-    private String motDePasse;
+    private String password;
     private String telephone;
 }
