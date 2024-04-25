@@ -66,7 +66,7 @@ public class RendezVousController {
                     "</body>\n" +
                     "</html>";
 
-            emailService.sendEmail("sejjari.soufiane@gmail.com", subject, template);
+            emailService.sendEmail(email, subject, template);
 
             return new ResponseEntity<>(createdRendezVous, HttpStatus.CREATED);
         } catch (IllegalArgumentException e) {
