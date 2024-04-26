@@ -1,6 +1,14 @@
+# Overview 
+
+Gestion de rendez-vous (Appointment Management): A web-based and mobile appointment management system developed using Spring Boot for the backend, incorporating Spring Security and Spring Data JPA, and React Native with Redux for the frontend mobile application. The system facilitates the scheduling of medical appointments, offering functionalities like user authentication, real-time availability checking, and appointment confirmation.
+
+[Front-end React-Native with redux Repository](https://github.com/soufianesejjari/GesRdv-react-native)
+
+
 # Project Architecture
 
 This project is a Java Spring Boot application that provides a RESTful API for managing appointments (RendezVous), health centers (CentreSante), time slots (Creneau), and users (Utilisateur). The application also includes authentication and authorization features.
+Front-end Repository
 
 ## Architectural Strategies
 
